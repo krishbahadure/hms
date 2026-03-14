@@ -36,6 +36,8 @@ mysql -u root -p -e "CREATE DATABASE hms_db CHARACTER SET utf8mb4 COLLATE utf8mb
 
 # Apply the schema (includes all tables, triggers, and seed data)
 mysql -u root -p hms_db < db/schema.sql
+migration
+2nd migration 
 ```
 
 ### 2. Backend Setup
