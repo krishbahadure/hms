@@ -1,0 +1,99 @@
+/* App.css – Role selector screen & global resets */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html, body, #root { height: 100%; }
+body { font-family: 'Inter', sans-serif; -webkit-font-smoothing: antialiased; }
+
+/* ── App root ── */
+.app-root { position: relative; min-height: 100vh; }
+
+/* ── Exit / switch-portal button ── */
+.exit-btn {
+  position: fixed;
+  top: 12px;
+  left: 12px;
+  z-index: 9999;
+  background: rgba(255,255,255,0.08);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255,255,255,0.15);
+  color: rgba(255,255,255,0.7);
+  font-size: 0.75rem;
+  padding: 5px 12px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-family: 'Inter', sans-serif;
+  transition: all 0.2s;
+}
+.exit-btn:hover { background: rgba(255,255,255,0.14); color: #fff; }
+
+/* ── Role selector screen ── */
+.role-screen {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
+  padding: 32px 20px;
+  gap: 40px;
+}
+
+.role-header { text-align: center; }
+.role-logo   { font-size: 4rem; margin-bottom: 16px; }
+.role-header h1 {
+  font-size: 2rem;
+  font-weight: 800;
+  color: #fff;
+  letter-spacing: -0.5px;
+  margin-bottom: 8px;
+}
+.role-header p { color: rgba(255,255,255,0.55); font-size: 0.95rem; }
+
+/* ── Role cards ── */
+.role-cards {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.role-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: 36px 30px;
+  width: 200px;
+  border-radius: 20px;
+  border: 1px solid rgba(255,255,255,0.12);
+  background: rgba(255,255,255,0.06);
+  backdrop-filter: blur(12px);
+  cursor: pointer;
+  font-family: 'Inter', sans-serif;
+  transition: transform 0.2s, background 0.2s, box-shadow 0.2s;
+  color: #fff;
+}
+.role-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 40px rgba(0,0,0,0.4);
+}
+
+.role-card.role-admin   { border-color: rgba(229,57,53,0.4); }
+.role-card.role-admin:hover   { background: rgba(229,57,53,0.12); }
+.role-card.role-doctor  { border-color: rgba(88,166,255,0.4); }
+.role-card.role-doctor:hover  { background: rgba(88,166,255,0.12); }
+.role-card.role-patient { border-color: rgba(92,107,192,0.4); }
+.role-card.role-patient:hover { background: rgba(92,107,192,0.12); }
+
+.role-icon { font-size: 3rem; }
+.role-name { font-size: 1.05rem; font-weight: 700; }
+.role-desc { font-size: 0.75rem; color: rgba(255,255,255,0.5); text-align: center; line-height: 1.4; }
+
+.role-footer { color: rgba(255,255,255,0.25); font-size: 0.78rem; letter-spacing: 0.5px; }
+
+@media (max-width: 600px) {
+  .role-cards { flex-direction: column; align-items: center; }
+  .role-card  { width: 100%; max-width: 300px; }
+  .role-header h1 { font-size: 1.5rem; }
+}
