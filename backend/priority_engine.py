@@ -1379,6 +1379,7 @@ class LoginRequest(BaseModel):
 @app.post("/api/auth/register", status_code=status.HTTP_201_CREATED,
           summary="Register a new user (patient / doctor / admin)")
 async def register(payload: RegisterRequest, db: AsyncSession = Depends(get_db)):
+
     # Check duplicate e-mail
     existing = await db.execute(
         text("SELECT id FROM users WHERE email = :email"),
@@ -1388,6 +1389,8 @@ async def register(payload: RegisterRequest, db: AsyncSession = Depends(get_db))
         raise HTTPException(status_code=409, detail="Email already registered")
 
     user_id = str(uuid.uuid4())
+
+    # Insert into users
     await db.execute(
         text("""
             INSERT INTO users (id, email, password_hash, role, full_name, phone)
@@ -1396,7 +1399,7 @@ async def register(payload: RegisterRequest, db: AsyncSession = Depends(get_db))
         {
             "id":    user_id,
             "email": payload.email,
-            "pwd":   payload.password,   # plain-text for demo
+            "pwd":   payload.password,
             "role":  payload.role,
             "name":  payload.full_name,
             "phone": payload.phone,
@@ -1404,6 +1407,8 @@ async def register(payload: RegisterRequest, db: AsyncSession = Depends(get_db))
     )
 
     patient_id = None
+
+    # ✅ Patient logic (existing)
     if payload.role == "patient":
         patient_id = str(uuid.uuid4())
         await db.execute(
@@ -1411,7 +1416,24 @@ async def register(payload: RegisterRequest, db: AsyncSession = Depends(get_db))
             {"id": patient_id, "uid": user_id}
         )
 
+    # 🔥 ADD THIS BLOCK (IMPORTANT)
+    if payload.role == "doctor":
+        doctor_id = str(uuid.uuid4())
+        await db.execute(
+            text("""
+                INSERT INTO doctors (id, user_id, specialty_id, is_available)
+                VALUES (:id, :uid, :sp_id, 1)
+            """),
+            {
+                "id": doctor_id,
+                "uid": user_id,
+                "sp_id": 1   # default specialty (General)
+            }
+        )
+
+    # Commit everything
     await db.commit()
+
     return {
         "success":    True,
         "user_id":    user_id,
