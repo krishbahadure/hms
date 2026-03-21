@@ -367,3 +367,23 @@
   .em-form-landing .form-grid-2 { grid-template-columns: 1fr; }
   .auth-card { padding: 24px 20px; }
 }
+/* ================= FIX LOGIN INPUT TEXT ================= */
+
+/* Force correct text color in auth (login/register) */
+.auth-card input,
+.auth-card textarea,
+.auth-card select {
+  color: #e2e8f0 !important;
+}
+
+/* Fix placeholder color */
+.auth-card input::placeholder,
+.auth-card textarea::placeholder {
+  color: #64748b;
+}
+
+/* Fix Chrome autofill (very important) */
+.auth-card input:-webkit-autofill {
+  -webkit-text-fill-color: #e2e8f0 !important;
+  transition: background-color 9999s ease-in-out 0s;
+}
