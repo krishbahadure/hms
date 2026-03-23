@@ -1,4 +1,8 @@
 import React, { useState } from "react";
+import { Clock, Shield, Users, BarChart3 } from "lucide-react";
+import { Activity } from "lucide-react";
+import { Zap } from "lucide-react";
+import { Building2 } from "lucide-react";
 import "./LandingPage.css";
 
 const API = process.env.REACT_APP_API_URL || "http://localhost:8000";
@@ -309,14 +313,23 @@ export default function LandingPage({ onLogin }) {
       <header className="landing-hero">
         <div className="hero-glow" />
         <nav className="landing-nav">
-          <div className="nav-logo">🏥 <span>MediCare HMS</span></div>
+
+          <div className="nav-logo">
+          <div className="logo-box">
+           <Activity size={22} strokeWidth={2.5} />
+        </div>
+        <span className="hero-gradient">MediCare HMS</span>
+    </div>
           <div className="nav-links">
             <button onClick={() => scrollTo("emergency")} className="nav-link">Emergency</button>
             <button onClick={() => scrollTo("auth")} className="nav-link nav-link-cta">Login / Register</button>
           </div>
         </nav>
         <div className="hero-content">
-          <div className="hero-badge">🏅 Advanced Hospital Management</div>
+          <div className="hero-badge">
+             <Zap size={16} strokeWidth={2.5} />
+            <span>Advanced Hospital Management</span>
+          </div>
           <h1 className="hero-title">
             Smarter Care,<br />
             <span className="hero-gradient">Faster Response</span>
@@ -333,29 +346,76 @@ export default function LandingPage({ onLogin }) {
             </button>
           </div>
           <div className="hero-stats">
-            <div className="hstat"><span>🏥</span><div><strong>Multi-Role</strong><small>Admin · Doctor · Patient</small></div></div>
-            <div className="hstat"><span>⚡</span><div><strong>Real-Time</strong><small>Live Priority Queue</small></div></div>
-            <div className="hstat"><span>📊</span><div><strong>Smart Triage</strong><small>AI Symptom Matching</small></div></div>
+           <div className="hstat blue">
+  <span><Building2 size={24} /></span>
+  <div>
+    <strong>Multi-Role</strong>
+    <small>Admin · Doctor · Patient</small>
+  </div>
+</div>
+
+<div className="hstat orange">
+  <span><Zap size={24} /></span>
+  <div>
+    <strong>Real-Time</strong>
+    <small>Live Priority Queue</small>
+  </div>
+</div>
+
+<div className="hstat green">
+  <span><BarChart3 size={24} /></span>
+  <div>
+    <strong>Smart Triage</strong>
+    <small>AI Symptom Matching</small>
+  </div>
+</div>
           </div>
         </div>
       </header>
 
       {/* ── Features Strip ──*/}
       <section className="features-strip">
-        {[
-          ["🚑", "Emergency Response", "Submit ambulance requests instantly with real-time admin alerts."],
-          ["⏱", "Priority Queue", "Severity-weighted OPD queue with live position updates."],
-          ["💊", "Medicine Management", "Admin prescribes medicines; patients view their regimen securely."],
-          ["📄", "PDF Reports", "Auto-generated intake documents and digital receipts."],
-        ].map(([icon, title, desc]) => (
-          <div key={title} className="feature-card">
-            <div className="fc-icon">{icon}</div>
-            <h3>{title}</h3>
-            <p>{desc}</p>
-          </div>
-        ))}
-      </section>
+  <div className="section-header">
+    <h2>Why Choose MediCare HMS?</h2>
+    <p>Built for modern healthcare facilities</p>
+  </div>
 
+  <div className="features-grid">
+
+  <div className="feature-item">
+    <div className="icon-circle blue">
+      <Clock size={28} strokeWidth={2.5} />
+    </div>
+    <h3>Save Time</h3>
+    <p>Reduce patient wait times by up to 60%</p>
+  </div>
+
+  <div className="feature-item">
+    <div className="icon-circle green">
+      <Shield size={28} strokeWidth={2.5} />
+    </div>
+    <h3>Secure</h3>
+    <p>HIPAA compliant data protection</p>
+  </div>
+
+  <div className="feature-item">
+    <div className="icon-circle purple">
+      <Users size={28} strokeWidth={2.5} />
+    </div>
+    <h3>Patient-Focused</h3>
+    <p>Better care through better management</p>
+  </div>
+
+  <div className="feature-item">
+    <div className="icon-circle orange">
+      <BarChart3 size={28} strokeWidth={2.5} />
+    </div>
+    <h3>Data-Driven</h3>
+    <p>Real-time analytics and insights</p>
+  </div>
+
+</div>
+</section>
       {/* ── Emergency Form ── */}
       <EmergencySection />
 
@@ -373,7 +433,7 @@ export default function LandingPage({ onLogin }) {
 
       {/* ── Footer ── */}
       <footer className="landing-footer">
-        <div className="footer-logo">🏥 MediCare HMS</div>
+        <div className="footer-logo">MediCare HMS</div>
         <p>Secure · RBAC Enforced · Real-time Priority Engine</p>
       </footer>
     </div>
